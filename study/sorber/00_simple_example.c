@@ -4,7 +4,7 @@
 
 void	*myturn(void *arg)
 {
-	while (1)
+	for (int i = 0; i < 8; i++)
 	{
 		sleep(1);
 		printf("My Turn!\n");
@@ -14,7 +14,7 @@ void	*myturn(void *arg)
 
 void	yourturn()
 {
-	while (1)
+	for (int i = 0; i < 3; i++)
 	{
 		sleep(2);
 		printf("Your Turn!\n");
@@ -27,5 +27,5 @@ int main()
 
 	pthread_create(&newthread, NULL, myturn, NULL);
 	yourturn();
-	pthread_join(&newthread, NULL); //Wait until a specific thread is over
+	pthread_join(newthread, NULL); //Wait until a specific thread is over
 }
