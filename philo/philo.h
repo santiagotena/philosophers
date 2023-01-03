@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/03 23:14:24 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/03 23:37:30 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 /* Libraries */
 //Threads Library
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include <pthread.h>
 
 /* Structs */
@@ -41,8 +41,6 @@ typedef struct s_philo
 // int		pipes_setup(int argc, char **argv, char **envp);
 
 // Utils //
-
-
-
+int		ft_atoi(const char *str);
 
 #endif
