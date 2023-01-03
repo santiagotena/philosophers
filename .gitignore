@@ -1,0 +1,12 @@
+# Output files
+obj/
+*.o
+*.a
+*.dSYM
+a.out
+
+# README file
+README.md
+
+# Specific folders and files
+philo
