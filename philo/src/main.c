@@ -6,13 +6,15 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 23:25:12 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/03 23:21:38 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/03 23:49:21 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 int	main(int argc, char **argv)
 {
+	(void)argc;
+	(void)argv;
 	return (0);
 }
