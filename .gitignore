@@ -2,11 +2,15 @@
 obj/
 *.o
 *.a
+
+#Debug files
 *.dSYM
-a.out
 
 # README file
 README.md
+
+# Executables
+a.out
 
 # Specific folders and files
 philo
