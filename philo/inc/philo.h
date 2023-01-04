@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/04 19:45:29 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/04 20:13:39 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 //Parameters 
 typedef struct s_param
 {
-	int					number_of_philosophers;
+	int					n_philo;
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
-	int					number_of_times_must_eat;
+	int					times_must_eat;
 
 	int					i;
 	struct t_philo 		*philos;
@@ -38,7 +38,7 @@ typedef struct s_param
 
 typedef struct s_philo
 {
-	int					number_of_philosophers;
+	int					n_philo;
 	struct t_param 		*param;
 }						t_philo;
 
