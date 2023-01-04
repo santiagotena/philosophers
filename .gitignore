@@ -1,16 +1,16 @@
-# # Output files
-# obj/
-# *.o
-# *.a
+# Output files
+obj/
+*.o
+*.a
 
-# #Debug files
-# *.dSYM
+#Debug files
+*.dSYM
 
-# # README file
-# README.md
+# README file
+README.md
 
-# # Executables
-# a.out
+# Executables
+a.out
 
-# # Specific folders and files
+# Specific folders and files
 # philo
