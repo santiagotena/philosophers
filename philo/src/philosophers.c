@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/04 22:53:42 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/04 23:02:33 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,9 @@ int		philosophers(t_param *param)
 		i++;
 	}
 	pthread_mutex_destroy(&mutex); // Delete
+	
+	free(param->th);
+	free(param->mutex);
+	free(param->philos);
     return (0);
 }
