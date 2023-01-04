@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/04 21:43:43 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/04 22:44:07 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@
 
 /* Structs */
 //Parameters 
+typedef struct s_philo
+{
+	struct t_param		*param;
+	
+	int					philo_id;
+	int					t_to_die;
+	int					t_to_eat;
+	int					t_to_sleep;
+	int					ts_must_eat;
+}						t_philo;
+
 typedef struct s_param
 {
 	int					n_philo;
@@ -30,19 +41,13 @@ typedef struct s_param
 	int					time_to_sleep;
 	int					times_must_eat;
 
-	int					i;
-	struct t_philo		*philos;
+	t_philo				*philos;
 	pthread_t			*th;
 	pthread_mutex_t		*mutex;
 
 	int					is_philo_dead;
 }						t_param;
 
-typedef struct s_philo
-{
-	int					philo_id;
-	struct t_param		*param;
-}						t_philo;
 
 /* Functions */
 // Parse Arguments //

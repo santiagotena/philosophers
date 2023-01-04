@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/04 21:35:55 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/04 22:53:42 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,41 +16,56 @@ pthread_mutex_t mutex; // Delete
 
 void	*routine(void *args)
 {
-	t_param		param;
+	t_philo		philo;
 	
-	param = *(t_param *)args;
+	philo = *(t_philo *)args;
 	pthread_mutex_lock(&mutex); // Delete
-    printf("Hello philosopher #%d\n", param.i);
+	printf("Philosopher %d is thinking\n", philo.philo_id);
 	pthread_mutex_unlock(&mutex); // Delete
 	return (NULL);
 }
 
 int		philosophers(t_param *param)
 {
+	int		i;
+	
 	param->th = malloc(sizeof(pthread_t) * (param->n_philo + 1));
 	param->mutex = malloc(sizeof(pthread_mutex_t) * (param->n_philo + 1));
-	param->i = 0;
+	param->philos = malloc(sizeof(t_philo) * param->n_philo);
 	
-	pthread_mutex_init(&mutex, NULL); // Delete
-    while (param->i < (param->n_philo + 1))
+	i = 1;
+	while (i <= param->n_philo)
 	{
-        if (pthread_create(&param->th[param->i], NULL, &routine, param) != 0)
+		param->philos[i].philo_id = i;
+		param->philos[i].t_to_die = param->time_to_die;
+		param->philos[i].t_to_eat = param->time_to_eat;
+		param->philos[i].t_to_sleep = param->time_to_sleep;
+		param->philos[i].ts_must_eat = param->times_must_eat;
+		i++;
+	}
+	
+	i = 1;
+	pthread_mutex_init(&mutex, NULL); // Delete
+    while (i < (param->n_philo + 1))
+	{
+        if (pthread_create(&param->th[i], NULL, &routine, &param->philos[i]) != 0)
 		{
 			write(2, "Failed to create thread\n", 25);
 			return (-1);
 		}
-		// printf("%d", param->i);
-		param->i++;
+		i++;
     }
-	param->i = 0;
-    while (param->i < (param->n_philo + 1))
+	
+	i = 1;
+    while (i < (param->n_philo + 1))
 	{
-        if (pthread_join(param->th[param->i], NULL) != 0) 
+        if (pthread_join(param->th[i], NULL) != 0) 
 		{
             write(2, "Failed to join thread\n", 23);
 			return (-1);
         }
-		param->i++;
+		i++;
 	}
+	pthread_mutex_destroy(&mutex); // Delete
     return (0);
 }
