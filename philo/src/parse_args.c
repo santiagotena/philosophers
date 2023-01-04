@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 01:54:01 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/04 20:13:45 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/04 21:25:08 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	ft_atoi_mod(const char *str)
 	}
 	output = sign * output;
 	if (exit_atoi(output, i) < 0)
+	{
+		write(2, "BIG BOY\n", 9);
 		return (-1);
+	}
 	return ((int)(output));
 }
 
