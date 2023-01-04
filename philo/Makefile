@@ -6,7 +6,7 @@
 #    By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 23:26:30 by stena-he          #+#    #+#              #
-#    Updated: 2023/01/03 23:52:19 by stena-he         ###   ########.fr        #
+#    Updated: 2023/01/04 02:02:56 by stena-he         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJ_PATH = obj/
 INC_PATH = inc/
 
 SRC		=	main.c \
-			utils.c
+			parse_args.c
 			
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)
