@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/04 20:52:13 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/04 21:35:55 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	*routine(void *args)
 
 int		philosophers(t_param *param)
 {
-	param->th = malloc(sizeof(pthread_t) * param->n_philo + 1);
-	param->mutex = malloc(sizeof(pthread_mutex_t) * param->n_philo + 1);
+	param->th = malloc(sizeof(pthread_t) * (param->n_philo + 1));
+	param->mutex = malloc(sizeof(pthread_mutex_t) * (param->n_philo + 1));
 	param->i = 0;
 	
 	pthread_mutex_init(&mutex, NULL); // Delete
-    while (param->i < param->n_philo + 1)
+    while (param->i < (param->n_philo + 1))
 	{
         if (pthread_create(&param->th[param->i], NULL, &routine, param) != 0)
 		{
@@ -43,7 +43,7 @@ int		philosophers(t_param *param)
 		param->i++;
     }
 	param->i = 0;
-    while (param->i < param->n_philo + 1)
+    while (param->i < (param->n_philo + 1))
 	{
         if (pthread_join(param->th[param->i], NULL) != 0) 
 		{
@@ -51,6 +51,6 @@ int		philosophers(t_param *param)
 			return (-1);
         }
 		param->i++;
-    }
+	}
     return (0);
 }
