@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 23:25:12 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/04 01:59:18 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:14:17 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	main(int argc, char **argv)
 	}
 	param = malloc(sizeof(t_param));
 	if (parse_args(argc, argv, param) < 0)
+	{
+		free(param);
+		return (-1);
+	}
+	if (philosophers(param) < 0)
 	{
 		free(param);
 		return (-1);
