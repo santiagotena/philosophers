@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 01:54:01 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/04 02:02:02 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/04 20:13:45 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ int	ft_atoi_mod(const char *str)
 
 int	parse_args(int argc, char **argv, t_param *param)
 {
-	param->number_of_philosophers = ft_atoi_mod(argv[1]);
+	param->n_philo = ft_atoi_mod(argv[1]);
 	param->time_to_die = ft_atoi_mod(argv[2]);
 	param->time_to_eat = ft_atoi_mod(argv[3]);
 	param->time_to_sleep = ft_atoi_mod(argv[4]);
 	if (argc == 6)
-		param->number_of_times_must_eat = ft_atoi_mod(argv[5]);
-	if (param->number_of_philosophers < 0)
+		param->times_must_eat = ft_atoi_mod(argv[5]);
+	if (param->n_philo < 0)
 		return (-1);
 	if (param->time_to_die < 0)
 		return (-1);
@@ -79,7 +79,7 @@ int	parse_args(int argc, char **argv, t_param *param)
 		return (-1);
 	if (param->time_to_sleep < 0)
 		return (-1);
-	if (param->number_of_times_must_eat < 0)
+	if (param->times_must_eat < 0)
 		return (-1);
 	return (0);
 }
