@@ -6,29 +6,24 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/04 23:02:33 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/06 02:47:33 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-pthread_mutex_t mutex; // Delete
 
 void	*routine(void *args)
 {
 	t_philo		philo;
 	
 	philo = *(t_philo *)args;
-	pthread_mutex_lock(&mutex); // Delete
 	printf("Philosopher %d is thinking\n", philo.philo_id);
-	pthread_mutex_unlock(&mutex); // Delete
 	return (NULL);
 }
 
 int		philosophers(t_param *param)
 {
 	int		i;
-	
 	param->th = malloc(sizeof(pthread_t) * (param->n_philo + 1));
 	param->mutex = malloc(sizeof(pthread_mutex_t) * (param->n_philo + 1));
 	param->philos = malloc(sizeof(t_philo) * param->n_philo);
@@ -44,8 +39,11 @@ int		philosophers(t_param *param)
 		i++;
 	}
 	
+	i = 0;
+	while (i < (param->n_philo + 1))
+		pthread_mutex_init(&param->mutex[i++], NULL);
+	
 	i = 1;
-	pthread_mutex_init(&mutex, NULL); // Delete
     while (i < (param->n_philo + 1))
 	{
         if (pthread_create(&param->th[i], NULL, &routine, &param->philos[i]) != 0)
@@ -66,7 +64,10 @@ int		philosophers(t_param *param)
         }
 		i++;
 	}
-	pthread_mutex_destroy(&mutex); // Delete
+
+	i = 0;
+	while (i < (param->n_philo + 1))
+		pthread_mutex_destroy(&param->mutex[i++]);
 	
 	free(param->th);
 	free(param->mutex);
