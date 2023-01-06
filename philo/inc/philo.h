@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/04 22:44:07 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/06 01:12:32 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/time.h>
 # include <pthread.h>
 
 /* Structs */
@@ -55,5 +56,8 @@ int		parse_args(int argc, char **argv, t_param *param);
 
 // Philosophers //
 int		philosophers(t_param *param);
+
+// Utils //
+
 
 #endif
