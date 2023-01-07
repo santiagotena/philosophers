@@ -6,7 +6,7 @@
 #    By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 23:26:30 by stena-he          #+#    #+#              #
-#    Updated: 2023/01/06 01:10:23 by stena-he         ###   ########.fr        #
+#    Updated: 2023/01/07 11:45:38 by stena-he         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ INC_PATH = inc/
 SRC		=	main.c \
 			parse_args.c \
 			philosophers.c \
+			sole_philo.c \
 			utils.c
 			
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))

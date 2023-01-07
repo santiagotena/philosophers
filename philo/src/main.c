@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 23:25:12 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/04 18:14:17 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/07 11:53:25 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ int	main(int argc, char **argv)
 	{
 		free(param);
 		return (-1);
+	}
+	if (param->n_philo == 1)
+	{
+		sole_philo(param->time_to_die);
+		free(param);
+		return (0);
 	}
 	if (philosophers(param) < 0)
 	{

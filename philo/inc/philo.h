@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/06 02:03:24 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/07 12:18:19 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_param
 	int					is_philo_dead;
 }						t_param;
 
-
 /* Functions */
 // Parse Arguments //
 int		parse_args(int argc, char **argv, t_param *param);
@@ -57,9 +56,11 @@ int		parse_args(int argc, char **argv, t_param *param);
 // Philosophers //
 int		philosophers(t_param *param);
 
+// Sole Philosopher
+void	sole_philo(int time_to_die);
+
 // Utils //
 time_t	get_time_in_ms(void);
 void	philo_sleep(time_t sleep_time, t_param *param);
-
 
 #endif
