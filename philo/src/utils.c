@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 01:09:58 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/06 01:47:50 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/07 12:22:30 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ time_t	get_time_in_ms(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-void	philo_sleep(time_t sleep_time, t_param *param) 
-{ 	
+void	philo_sleep(time_t sleep_time, t_param *param)
+{
 	time_t	wake_up_time;
-	
+
 	wake_up_time = get_time_in_ms() + sleep_time;
 	while (get_time_in_ms() < wake_up_time)
-	{ 				
-		if (param->is_philo_dead) 			
-			break ; 		
-		usleep(10); 	
-	} 
+	{
+		if (param->is_philo_dead)
+			break ;
+		usleep(10);
+	}
 }
