@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 23:25:12 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/07 11:53:25 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/08 22:37:16 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ int	main(int argc, char **argv)
 	t_param		*param;
 
 	if (argc < 5 || argc > 6)
-	{
 		write(2, "Invalid number of arguments\n", 29);
+	if (argc < 5 || argc > 6)
 		return (-1);
-	}
 	param = malloc(sizeof(t_param));
 	if (parse_args(argc, argv, param) < 0)
 	{
@@ -34,10 +33,9 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	if (philosophers(param) < 0)
-	{
 		free(param);
+	if (philosophers(param) < 0)
 		return (-1);
-	}
 	free(param);
 	return (0);
 }
