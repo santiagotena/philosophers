@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   messages.c                                         :+:      :+:    :+:   */
+/*   sole_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 22:41:06 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/08 22:45:55 by stena-he         ###   ########.fr       */
+/*   Created: 2023/01/08 22:45:32 by stena-he          #+#    #+#             */
+/*   Updated: 2023/01/08 22:46:28 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	sole_philo(int time_to_die)
+{
+	time_t		start_time;
 
-
-
-// timestamp_in_ms X has taken a fork ◦ timestamp_in_ms X is eating
-// timestamp_in_ms X is sleeping
-// timestamp_in_ms X is thinking
-// timestamp_in_ms X died
+	start_time = get_time_in_ms();
+	usleep(time_to_die * 1000);
+	printf("%ld ms: 1 has died\n", (get_time_in_ms() - start_time));
+}
