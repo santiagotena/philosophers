@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 01:09:58 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/09 19:31:10 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:52:42 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ unsigned long long	get_time_in_ms(void)
 
 void ft_sleep(int ms)
 {
-	unsigned long long	i;
+	unsigned long long	start_time;
 
-	i = get_time_in_ms();
+	start_time = get_time_in_ms();
 	while(1)
-		if((int)(get_time_in_ms() - i) >= ms)
+		if((int)(get_time_in_ms() - start_time) >= ms)
 			break ;
 }
 
@@ -39,6 +39,6 @@ void	philo_sleep(unsigned long long sleep_time, t_param *param)
 	{
 		if (param->is_philo_dead)
 			break ;
-		usleep(10);
+		ft_sleep(1);
 	}
 }
