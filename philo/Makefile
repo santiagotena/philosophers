@@ -6,7 +6,7 @@
 #    By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 23:26:30 by stena-he          #+#    #+#              #
-#    Updated: 2023/01/08 22:47:07 by stena-he         ###   ########.fr        #
+#    Updated: 2023/01/08 23:08:32 by stena-he         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC		=	main.c \
 			parse_args.c \
 			sole_philo.c \
 			philosophers.c \
-			messages.c \
+			actions.c \
 			utils.c
 			
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))

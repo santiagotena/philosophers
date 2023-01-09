@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/08 22:46:17 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/09 01:09:23 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_param
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					times_must_eat;
+	time_t				start_time;
 
 	t_philo				*philos;
 	pthread_t			*th;
@@ -59,8 +60,12 @@ int		philosophers(t_param *param);
 // Sole Philosopher //
 void	sole_philo(int time_to_die);
 
-// Message //
-
+// Actions //
+void	take_fork(t_philo *philo);
+void	eat(t_philo *philo);
+void	sleeping(t_philo *philo);
+void	think(t_philo *philo);
+void	die(t_philo *philo);
 
 // Utils //
 time_t	get_time_in_ms(void);
