@@ -6,13 +6,13 @@
 #    By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 23:26:30 by stena-he          #+#    #+#              #
-#    Updated: 2023/01/08 23:08:32 by stena-he         ###   ########.fr        #
+#    Updated: 2023/01/09 19:16:52 by stena-he         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= philo
 CC		= gcc
-CFLAGS	= -Werror -Wall -Wextra -pthread
+CFLAGS	= -Werror -Wall -Wextra -pthread -g
 
 SRC_PATH = src/
 OBJ_PATH = obj/
