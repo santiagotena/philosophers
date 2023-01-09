@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/09 19:32:05 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/09 20:31:48 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	*routine(void *args)
 	
 	philo = (t_philo *)args;
 	// pthread_mutex_lock(&mutex); // Delete
-	ft_sleep(100);
 	take_fork(philo);
 	eat(philo);
 	sleeping(philo);
@@ -35,11 +34,10 @@ int		philosophers(t_param *param)
 {
 	int		i;
 	
+	// Initialize values //
 	param->th = malloc(sizeof(pthread_t) * (param->n_philo + 1));
 	param->mutex = malloc(sizeof(pthread_mutex_t) * (param->n_philo + 1));
 	param->philos = malloc(sizeof(t_philo) * param->n_philo);
-
-	// pthread_mutex_init(&mutex, NULL); // Delete
 	
 	i = 1;
 	while (i <= param->n_philo)
@@ -49,12 +47,15 @@ int		philosophers(t_param *param)
 		i++;
 	}
 	
+	// Init mutexes //
 	i = 0;
 	while (i < (param->n_philo + 1))
 		pthread_mutex_init(&param->mutex[i++], NULL);
+	// pthread_mutex_init(&mutex, NULL); // Delete
 	
+	
+	// Init threads //
 	i = 1;
-	// param->start_time = malloc(sizeof(long));
 	param->start_time = get_time_in_ms();
     while (i < (param->n_philo + 1))
 	{
@@ -66,6 +67,7 @@ int		philosophers(t_param *param)
 		i++;
     }
 	
+	// Join threads //
 	i = 1;
     while (i < (param->n_philo + 1))
 	{
@@ -77,15 +79,15 @@ int		philosophers(t_param *param)
 		i++;
 	}
 
+	// Destroy mutex //
 	i = 0;
 	while (i < (param->n_philo + 1))
 		pthread_mutex_destroy(&param->mutex[i++]);
-	
 	// pthread_mutex_destroy(&mutex); // Delete
 	
+	// Free stuff //
 	free(param->th);
 	free(param->mutex);
 	free(param->philos);
-	// free(param->start_time);
     return (0);
 }
