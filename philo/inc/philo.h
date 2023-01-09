@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/09 19:31:35 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/09 22:19:20 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_philo
 	struct s_param		*param;
 	int					philo_id;
 	int					ts_must_eat;
+	pthread_mutex_t		*msg_mutex;
 }						t_philo;
 
 typedef struct s_param
