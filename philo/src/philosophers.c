@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/09 19:26:38 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:32:05 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*routine(void *args)
 	
 	philo = (t_philo *)args;
 	// pthread_mutex_lock(&mutex); // Delete
-	sleep(5);
+	ft_sleep(100);
 	take_fork(philo);
 	eat(philo);
 	sleeping(philo);

@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/09 19:21:39 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:31:35 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void				die(t_philo *philo);
 
 // Utils //
 unsigned long long	get_time_in_ms(void);
+void				ft_sleep(int ms);
 void				philo_sleep(unsigned long long sleep_time, t_param *param);
 
 #endif
