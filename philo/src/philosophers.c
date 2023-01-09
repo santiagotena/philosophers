@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/09 02:46:30 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:26:38 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 
 void	*routine(void *args)
 {
-	t_philo		philo;
+	t_philo		*philo;
 	
-	philo = *(t_philo *)args;
+	philo = (t_philo *)args;
 	// pthread_mutex_lock(&mutex); // Delete
-	take_fork(&philo);
-	eat(&philo);
-	sleeping(&philo);
-	think(&philo);
-	die(&philo);
+	sleep(5);
+	take_fork(philo);
+	eat(philo);
+	sleeping(philo);
+	think(philo);
+	die(philo);
 	// pthread_mutex_unlock(&mutex); // Delete
 	
 	return (NULL);
@@ -44,7 +45,7 @@ int		philosophers(t_param *param)
 	while (i <= param->n_philo)
 	{
 		param->philos[i].philo_id = i;
-		param->philos[i].ts_must_eat = param->times_must_eat;
+		param->philos[i].param = param;
 		i++;
 	}
 	
@@ -53,7 +54,7 @@ int		philosophers(t_param *param)
 		pthread_mutex_init(&param->mutex[i++], NULL);
 	
 	i = 1;
-	// param->start_time = malloc(sizeof(time_t));
+	// param->start_time = malloc(sizeof(long));
 	param->start_time = get_time_in_ms();
     while (i < (param->n_philo + 1))
 	{
