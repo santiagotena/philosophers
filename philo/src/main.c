@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 23:25:12 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/08 22:37:16 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/09 02:44:57 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	if (philosophers(param) < 0)
+	{
 		free(param);
-	if (philosophers(param) < 0)
 		return (-1);
+	}
 	free(param);
 	return (0);
 }
