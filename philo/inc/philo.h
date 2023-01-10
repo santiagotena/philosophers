@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 03:36:59 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 04:03:57 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ typedef struct s_philo
 	struct s_param		*param;
 	int					philo_id;
 	int					ts_must_eat;
-
 	unsigned long long	time_last_meal;
-	
-	pthread_mutex_t		*msg_mutex; // Unsure
 }						t_philo;
 
 typedef struct s_param
@@ -43,11 +40,9 @@ typedef struct s_param
 	int					times_must_eat;
 	int					is_times_must_eat;
 	unsigned long long	start_time;
-
 	t_philo				*philos;
 	pthread_t			*th;
-	pthread_mutex_t		*mutex; // Unsure
-
+	pthread_mutex_t		*mutex;
 	int					is_philo_dead;
 	int					hungry_philo;
 }						t_param;

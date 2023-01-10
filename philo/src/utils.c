@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 01:09:58 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/09 21:47:46 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 03:57:46 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ft_sleep(int ms)
 	unsigned long long	start_time;
 
 	start_time = get_time_in_ms();
-	while(1)
-		if((int)(get_time_in_ms() - start_time) >= ms)
+	while (1)
+		if ((int)(get_time_in_ms() - start_time) >= ms)
 			break ;
 }
 

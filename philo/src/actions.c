@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:41:06 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 02:12:52 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 04:00:54 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	die(t_philo *philo)
 {
 	unsigned long long	time;
-	
+
 	philo->param->is_philo_dead = 1;
 	time = get_time_in_ms() - philo->param->start_time;
 	printf("%llu ms: %d died\n", time, philo->philo_id);
@@ -24,7 +24,7 @@ void	die(t_philo *philo)
 void	take_fork(t_philo *philo)
 {	
 	unsigned long long	time;
-	
+
 	if (philo->param->is_philo_dead == 1)
 		return ;
 	time = get_time_in_ms() - philo->param->start_time;
@@ -34,7 +34,7 @@ void	take_fork(t_philo *philo)
 void	eat(t_philo *philo)
 {
 	unsigned long long	time;
-	
+
 	if (philo->param->is_philo_dead == 1)
 		return ;
 	time = get_time_in_ms() - philo->param->start_time;
@@ -47,7 +47,7 @@ void	eat(t_philo *philo)
 void	sleeping(t_philo *philo)
 {
 	unsigned long long	time;
-	
+
 	if (philo->param->is_philo_dead == 1)
 		return ;
 	time = get_time_in_ms() - philo->param->start_time;
@@ -58,10 +58,9 @@ void	sleeping(t_philo *philo)
 void	think(t_philo *philo)
 {
 	unsigned long long	time;
-	
+
 	if (philo->param->is_philo_dead == 1)
 		return ;
 	time = get_time_in_ms() - philo->param->start_time;
 	printf("%llu ms: %d is thinking\n", time, philo->philo_id);
-	// time to think cacl + sleep
 }
