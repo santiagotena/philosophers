@@ -6,29 +6,29 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:26:22 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 20:47:29 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 20:59:19 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int		grab_own_fork(t_philo *philo)
+bool		grab_own_fork(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->fork_lock);
 	if (philo->is_fork_taken == 0)
 	{
 		philo->is_fork_taken = 1;
 		pthread_mutex_unlock(&philo->fork_lock);
-		return (0);
+		return (true);
 	}
 	else
 	{	
 		pthread_mutex_unlock(&philo->fork_lock);
-		return (-1);
+		return (false);
 	}
 }
 
-int		grab_next_fork(t_philo *philo)
+bool		grab_next_fork(t_philo *philo)
 {
 	t_philo		*philo_next;
 	int			philo_id;
@@ -45,16 +45,16 @@ int		grab_next_fork(t_philo *philo)
 	{
 		philo_next->is_fork_taken = 1;
 		pthread_mutex_unlock(&philo_next->fork_lock);
-		return (0);
+		return (true);
 	}
 	else
 	{	
 		pthread_mutex_unlock(&philo_next->fork_lock);
-		return (-1);
+		return (false);
 	}
 }
 
 // void	drop_forks(t_philo *philo)
 // {
-
+	
 // }

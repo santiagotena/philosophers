@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 17:43:23 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 20:59:15 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,18 @@ void	*routine(void *args)
 		ft_sleep(1);
 	while (philo->param->is_philo_dead == 0)
 	{
-		// grab_own_fork(philo);
-		// grab_next_fork(philo);
-		take_fork(philo);
-		eat(philo);
-		// drop_forks(philo);
+		while (1)
+		{
+			if (grab_own_fork(philo) && grab_next_fork(philo))
+			{
+				take_fork(philo);
+				eat(philo);
+				// drop_forks(philo);
+				break ;
+			}
+			else
+				ft_sleep(1);
+		}
 		sleeping(philo);
 		think(philo);
 		if (philo->param->is_times_must_eat && philo->ts_must_eat == 0)

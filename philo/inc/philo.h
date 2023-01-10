@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 17:58:06 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 20:56:51 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
 # include <sys/time.h>
 # include <pthread.h>
 
@@ -64,8 +65,8 @@ void				think(t_philo *philo);
 void				die(t_philo *philo);
 
 // Fork Actions //
-int				grab_own_fork(t_philo *philo);
-// void				grab_next_fork(t_philo *philo);
+bool				grab_own_fork(t_philo *philo);
+bool				grab_next_fork(t_philo *philo);
 // void				drop_forks(t_philo *philo);
 
 // Utils //
