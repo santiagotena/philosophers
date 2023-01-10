@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 02:13:07 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 02:46:47 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,29 @@ void	*routine(void *args)
 	return (NULL);
 }
 
-// void	*main_routine(void *args)
-// {
-// 	int					i;
-// 	unsigned long long	last_meal;
-// 	t_param				*param;
+void	*main_routine(void *args)
+{
+	int					i;
+	unsigned long long	last_meal;
+	t_param				*param;
 	
-// 	param = (t_param *)args;
-	
-// 	printf("\nHello\n");
-// 	param->is_philo_dead = 0;
-// 	while (param->is_philo_dead == 0)
-// 	{
-// 		i = 1;
-// 		while (i <= param->n_philo)
-// 		{
-// 			last_meal = get_time_in_ms() - param->philos[i].time_last_meal;
-// 			printf("last meal: %llu\n", last_meal);
-// 			if (last_meal >= param->time_to_die)
-// 			{
-// 				// param->is_philo_dead = 1;
-// 				die(&param->philos[i]);
-// 			}
-// 			i++;
-// 		}
-// 	}
-// 	return (NULL);
-// }
+	param = (t_param *)args;
+	while (param->is_philo_dead == 0)
+	{
+		i = 1;
+		while (i <= param->n_philo)
+		{
+			last_meal = get_time_in_ms() - param->philos[i].time_last_meal;
+			if (last_meal >= param->time_to_die)
+			{
+				die(&param->philos[i]);
+				break ;
+			}
+			i++;
+		}
+	}
+	return (NULL);
+}
 
 int		philosophers(t_param *param)
 {
@@ -101,14 +97,14 @@ int		philosophers(t_param *param)
 		}
 		i++;
     }
-	// if (pthread_create(&param->th[0], NULL, &main_routine, &param) != 0)
-	// {
-	// 	write(2, "Failed to create thread\n", 25);
-	// 	return (-1);
-	// }
+	if (pthread_create(&param->th[0], NULL, &main_routine, param) != 0)
+	{
+		write(2, "Failed to create thread\n", 25);
+		return (-1);
+	}
 	
 	// Join threads //
-	i = 1; // Must equal 0
+	i = 0; // Must equal 0
     while (i < (param->n_philo + 1))
 	{
         if (pthread_join(param->th[i], NULL) != 0) 
