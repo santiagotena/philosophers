@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 02:46:47 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 03:44:22 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	*routine(void *args)
 		sleeping(philo);
 		think(philo);
 		if (philo->param->is_times_must_eat && philo->ts_must_eat == 0)
+		{
+			philo->param->hungry_philo--;
 			break ;
+		}
 	}
 	return (NULL);
 }
@@ -43,11 +46,13 @@ void	*main_routine(void *args)
 	t_param				*param;
 	
 	param = (t_param *)args;
-	while (param->is_philo_dead == 0)
+	while (param->is_philo_dead == 0 && param->hungry_philo > 0)
 	{
 		i = 1;
 		while (i <= param->n_philo)
 		{
+			if (param->hungry_philo == 0)
+				break ;
 			last_meal = get_time_in_ms() - param->philos[i].time_last_meal;
 			if (last_meal >= param->time_to_die)
 			{
@@ -68,6 +73,7 @@ int		philosophers(t_param *param)
 	param->th = malloc(sizeof(pthread_t) * (param->n_philo + 1));
 	param->mutex = malloc(sizeof(pthread_mutex_t) * (param->n_philo + 1));
 	param->philos = malloc(sizeof(t_philo) * param->n_philo);
+	param->hungry_philo = param->n_philo;
 	
 	i = 1;
 	while (i <= param->n_philo)
