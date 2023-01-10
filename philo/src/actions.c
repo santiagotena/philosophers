@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:41:06 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/09 23:48:24 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 02:12:52 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	eat(t_philo *philo)
 		return ;
 	time = get_time_in_ms() - philo->param->start_time;
 	printf("%llu ms: %d is eating\n", time, philo->philo_id);
-	// Add time of meal
+	philo->time_last_meal = get_time_in_ms();
+	philo->ts_must_eat--;
 	philo_sleep(philo->param->time_to_eat, philo->param);
 }
 
@@ -63,5 +64,4 @@ void	think(t_philo *philo)
 	time = get_time_in_ms() - philo->param->start_time;
 	printf("%llu ms: %d is thinking\n", time, philo->philo_id);
 	// time to think cacl + sleep
-	// perpetual thinking
 }
