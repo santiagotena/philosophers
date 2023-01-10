@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 17:36:36 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:43:23 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,17 @@ int		philosophers(t_param *param)
 		param->philos[i].philo_id = i;
 		param->philos[i].ts_must_eat = param->times_must_eat;
 		param->philos[i].is_fork_taken = 0;
-		
 		param->philos[i].param = param;
 		i++;
 	}
 	
 	// Init mutexes //
-	// i = 0;
-	// while (i <= param->n_philo)
-	// {
-	// 	pthread_mutex_init(param->n_philo[i], NULL);
-	// 	i++;
-	// }
+	i = 1;
+	while (i <= param->n_philo)
+	{
+		pthread_mutex_init(&param->philos->fork_lock, NULL);
+		i++;
+	}
 	
 	// Init threads //
 	i = 1;
@@ -111,7 +110,7 @@ int		philosophers(t_param *param)
 	}
 	
 	// Join threads //
-	i = 0; // Must equal 0
+	i = 0;
     while (i < (param->n_philo + 1))
 	{
         if (pthread_join(param->th[i], NULL) != 0) 
@@ -123,9 +122,12 @@ int		philosophers(t_param *param)
 	}
 
 	// Destroy mutex //
-	// i = 0;
-	// while (i < (param->n_philo + 1))
-	// 	pthread_mutex_destroy(&param->mutex[i++]);
+	i = 1;
+	while (i < param->n_philo)
+	{
+		pthread_mutex_destroy(&param->philos->fork_lock);
+		i++;
+	}
 	
 	// Free stuff //
 	free(param->th);
