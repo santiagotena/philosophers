@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 17:25:42 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:36:36 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,19 @@ int		philosophers(t_param *param)
 	{
 		param->philos[i].philo_id = i;
 		param->philos[i].ts_must_eat = param->times_must_eat;
+		param->philos[i].is_fork_taken = 0;
+		
 		param->philos[i].param = param;
 		i++;
 	}
 	
 	// Init mutexes //
 	// i = 0;
-	// while (i < (param->n_philo + 1))
-	// 	pthread_mutex_init(&param->mutex[i++], NULL);	
+	// while (i <= param->n_philo)
+	// {
+	// 	pthread_mutex_init(param->n_philo[i], NULL);
+	// 	i++;
+	// }
 	
 	// Init threads //
 	i = 1;
