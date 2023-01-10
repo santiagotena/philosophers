@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 00:01:28 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 02:13:07 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	*routine(void *args)
 	t_philo		*philo;
 	
 	philo = (t_philo *)args;
+	philo->time_last_meal = philo->param->start_time;
 	while (philo->param->is_philo_dead == 0)
 	{
 		// pthread_mutex_lock(&mutex); // Delete
@@ -29,37 +30,39 @@ void	*routine(void *args)
 		eat(philo);
 		sleeping(philo);
 		think(philo);
-		if (philo->ts_must_eat == 0)
+		if (philo->param->is_times_must_eat && philo->ts_must_eat == 0)
 			break ;
 	}
 	return (NULL);
 }
 
-void	*main_routine(void *args)
-{
-	int					i;
-	unsigned long long	last_meal;
-	t_param				*param;
+// void	*main_routine(void *args)
+// {
+// 	int					i;
+// 	unsigned long long	last_meal;
+// 	t_param				*param;
 	
-	i = 1;
-	param = (t_param *)args;
-	if (param->times_must_eat == 0)
-	{
-		while (param->is_philo_dead == 0)
-		{
-			while (i <= param->n_philo)
-			{
-				last_meal = get_time_in_ms() - param->philos[i].time_last_meal;
-				if (last_meal >= param->time_to_die)
-				{
-					die(&param->philos[i]);
-				}
-			}
-			i = 1;
-		}
-	}
-	return (NULL);
-}
+// 	param = (t_param *)args;
+	
+// 	printf("\nHello\n");
+// 	param->is_philo_dead = 0;
+// 	while (param->is_philo_dead == 0)
+// 	{
+// 		i = 1;
+// 		while (i <= param->n_philo)
+// 		{
+// 			last_meal = get_time_in_ms() - param->philos[i].time_last_meal;
+// 			printf("last meal: %llu\n", last_meal);
+// 			if (last_meal >= param->time_to_die)
+// 			{
+// 				// param->is_philo_dead = 1;
+// 				die(&param->philos[i]);
+// 			}
+// 			i++;
+// 		}
+// 	}
+// 	return (NULL);
+// }
 
 int		philosophers(t_param *param)
 {
@@ -74,6 +77,7 @@ int		philosophers(t_param *param)
 	while (i <= param->n_philo)
 	{
 		param->philos[i].philo_id = i;
+		param->philos[i].ts_must_eat = param->times_must_eat;
 		param->philos[i].param = param;
 		i++;
 	}
@@ -97,14 +101,14 @@ int		philosophers(t_param *param)
 		}
 		i++;
     }
-	if (pthread_create(&param->th[0], NULL, &main_routine, &param) != 0)
-	{
-		write(2, "Failed to create thread\n", 25);
-		return (-1);
-	}
+	// if (pthread_create(&param->th[0], NULL, &main_routine, &param) != 0)
+	// {
+	// 	write(2, "Failed to create thread\n", 25);
+	// 	return (-1);
+	// }
 	
 	// Join threads //
-	i = 0;
+	i = 1; // Must equal 0
     while (i < (param->n_philo + 1))
 	{
         if (pthread_join(param->th[i], NULL) != 0) 
