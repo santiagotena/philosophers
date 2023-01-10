@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 04:03:57 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 04:23:59 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PHILO_H
 
 /* Libraries */
-//Threads Library
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -22,7 +21,6 @@
 # include <pthread.h>
 
 /* Structs */
-//Parameters 
 typedef struct s_philo
 {
 	struct s_param		*param;
