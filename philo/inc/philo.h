@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/09 23:57:03 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 01:52:44 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_param
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					times_must_eat;
+	int					is_times_must_eat;
 	unsigned long long	start_time;
 
 	t_philo				*philos;
