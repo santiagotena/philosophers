@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 20:59:15 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 21:38:16 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*routine(void *args)
 			{
 				take_fork(philo);
 				eat(philo);
-				// drop_forks(philo);
+				drop_forks(philo);
 				break ;
 			}
 			else
@@ -52,6 +52,7 @@ void	*main_routine(void *args)
 	t_param				*param;
 	
 	param = (t_param *)args;
+	ft_sleep(param->time_to_die/2);
 	while (param->is_philo_dead == 0 && param->hungry_philo > 0)
 	{
 		i = 1;
