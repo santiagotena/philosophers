@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 03:44:22 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 04:30:47 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	*routine(void *args)
 	
 	philo = (t_philo *)args;
 	philo->time_last_meal = philo->param->start_time;
+	if (philo->philo_id % 2 == 0)
+		ft_sleep(1);
 	while (philo->param->is_philo_dead == 0)
 	{
 		// pthread_mutex_lock(&mutex); // Delete
