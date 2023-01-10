@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 22:53:56 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 23:01:06 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,8 @@ int	init_threads_mutex(t_param *param)
 	int		i;
 
 	i = 1;
-	while (i <= param->n_philo)
-	{
+	while (i++ <= param->n_philo)
 		pthread_mutex_init(&param->philos->fork_lock, NULL);
-		i++;
-	}
 	i = 1;
 	param->start_time = get_time_in_ms();
 	while (i < (param->n_philo + 1))

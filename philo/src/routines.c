@@ -6,18 +6,14 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 22:48:50 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 23:09:37 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*routine(void *args)
+void	routine_cont(t_philo *philo)
 {
-	t_philo		*philo;
-
-	philo = (t_philo *)args;
-	philo->time_last_meal = philo->param->start_time;
 	if (philo->philo_id % 2 == 0)
 		ft_sleep(1);
 	while (philo->param->is_philo_dead == 0)
@@ -42,6 +38,15 @@ void	*routine(void *args)
 			break ;
 		}
 	}
+}
+
+void	*routine(void *args)
+{
+	t_philo		*philo;
+
+	philo = (t_philo *)args;
+	philo->time_last_meal = philo->param->start_time;
+	routine_cont(philo);
 	return (NULL);
 }
 
