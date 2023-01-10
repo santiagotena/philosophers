@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 01:54:01 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 23:34:07 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 23:49:03 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,30 @@ int	ft_atoi_mod(const char *str)
 	return ((int)(output));
 }
 
+int	parse_args_check(t_param *param)
+{
+	if (param->n_philo < 0)
+		return (-1);
+	if ((int)param->time_to_die < 0)
+		return (-1);
+	if (param->time_to_eat < 0)
+		return (-1);
+	if (param->time_to_sleep < 0)
+		return (-1);
+	if (param->times_must_eat < 0)
+		return (-1);
+	return (0);
+}
+
 int	parse_args(int argc, char **argv, t_param *param)
 {
 	param->is_philo_dead = 0;
 	param->n_philo = ft_atoi_mod(argv[1]);
+	if (param->n_philo == 0)
+	{
+		write(2, "Invalid argument\n", 18);
+		return (-1);
+	}
 	param->time_to_die = ft_atoi_mod(argv[2]);
 	param->time_to_eat = ft_atoi_mod(argv[3]);
 	param->time_to_sleep = ft_atoi_mod(argv[4]);
@@ -71,15 +91,7 @@ int	parse_args(int argc, char **argv, t_param *param)
 	}
 	else
 		param->times_must_eat = 0;
-	if (param->n_philo < 0)
-		return (-1);
-	if ((int)param->time_to_die < 0)
-		return (-1);
-	if (param->time_to_eat < 0)
-		return (-1);
-	if (param->time_to_sleep < 0)
-		return (-1);
-	if (param->times_must_eat < 0)
+	if (parse_args_check(param) < 0)
 		return (-1);
 	return (0);
 }
