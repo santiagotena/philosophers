@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 01:54:01 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 02:11:48 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 22:08:07 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,6 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-/**
- * @brief Converts the initial portion of the string pointed to by str to 
- * int representation.
- * 
- * @param str 
- * @return int 
- */
 int	ft_atoi_mod(const char *str)
 {
 	long int	output;
