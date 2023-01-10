@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 04:50:53 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:22:04 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int		philosophers(t_param *param)
 	
 	// Initialize values //
 	param->th = malloc(sizeof(pthread_t) * (param->n_philo + 1));
-	param->mutex = malloc(sizeof(pthread_mutex_t) * (param->n_philo + 1));
 	param->philos = malloc(sizeof(t_philo) * param->n_philo);
 	param->hungry_philo = param->n_philo;
 	
@@ -87,11 +86,9 @@ int		philosophers(t_param *param)
 	}
 	
 	// Init mutexes //
-	i = 0;
-	while (i < (param->n_philo + 1))
-		pthread_mutex_init(&param->mutex[i++], NULL);
-	// pthread_mutex_init(&mutex, NULL); // Delete
-	
+	// i = 0;
+	// while (i < (param->n_philo + 1))
+	// 	pthread_mutex_init(&param->mutex[i++], NULL);	
 	
 	// Init threads //
 	i = 1;
@@ -124,14 +121,12 @@ int		philosophers(t_param *param)
 	}
 
 	// Destroy mutex //
-	i = 0;
-	while (i < (param->n_philo + 1))
-		pthread_mutex_destroy(&param->mutex[i++]);
-	// pthread_mutex_destroy(&mutex); // Delete
+	// i = 0;
+	// while (i < (param->n_philo + 1))
+	// 	pthread_mutex_destroy(&param->mutex[i++]);
 	
 	// Free stuff //
 	free(param->th);
-	free(param->mutex);
 	free(param->philos);
     return (0);
 }
