@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 17:28:33 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:58:06 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void				think(t_philo *philo);
 void				die(t_philo *philo);
 
 // Fork Actions //
-// void				grab_own_fork(t_philo *philo);
+int				grab_own_fork(t_philo *philo);
 // void				grab_next_fork(t_philo *philo);
 // void				drop_forks(t_philo *philo);
 
