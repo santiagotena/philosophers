@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:41:06 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/11 01:16:35 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/11 02:58:39 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	sleeping(t_philo *philo)
 void	think(t_philo *philo)
 {
 	unsigned long long	time;
+	unsigned long long	time_to_think;
 
 	if (philo->param->is_philo_dead == 1)
 		return ;
@@ -62,6 +63,9 @@ void	think(t_philo *philo)
 	pthread_mutex_lock(&philo->param->msg_mutex);
 	printf("%llu ms: %d is thinking\n", time, philo->philo_id);
 	pthread_mutex_unlock(&philo->param->msg_mutex);
+	
+	time_to_think = (philo->param->time_to_die - (get_time_in_ms() - philo->time_last_meal) - philo->param->time_to_eat) / 2;
+	ft_sleep(time_to_think);
 }
 
 void	die(t_philo *philo)
