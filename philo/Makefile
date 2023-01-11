@@ -6,13 +6,13 @@
 #    By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 23:26:30 by stena-he          #+#    #+#              #
-#    Updated: 2023/01/10 22:10:44 by stena-he         ###   ########.fr        #
+#    Updated: 2023/01/11 21:33:09 by stena-he         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= a.out
 CC		= gcc
-CFLAGS	= -Werror -Wall -Wextra -pthread -g
+CFLAGS	= -Werror -Wall -Wextra -pthread -g #-fsanitize=thread
 
 SRC_PATH = src/
 OBJ_PATH = obj/
