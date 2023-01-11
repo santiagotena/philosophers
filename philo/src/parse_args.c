@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 01:54:01 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/11 02:45:12 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/11 03:54:55 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,10 @@ int	parse_args(int argc, char **argv, t_param *param)
 			return (-1);
 	}
 	else
+	{
 		param->is_times_must_eat = 0;
 		param->times_must_eat = 0;
+	}
 	if (parse_args_check(param) < 0)
 		return (-1);
 	return (0);
