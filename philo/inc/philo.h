@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 22:15:12 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/11 00:55:16 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_param
 	unsigned long long	start_time;
 	t_philo				*philos;
 	pthread_t			*th;
+	pthread_mutex_t		msg_mutex;
 	int					is_philo_dead;
 	int					hungry_philo;
 }						t_param;
