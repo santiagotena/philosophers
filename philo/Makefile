@@ -6,7 +6,7 @@
 #    By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 23:26:30 by stena-he          #+#    #+#              #
-#    Updated: 2023/01/11 22:52:08 by stena-he         ###   ########.fr        #
+#    Updated: 2023/01/11 23:10:34 by stena-he         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC		=	main.c \
 			parse_args.c \
 			sole_philo.c \
 			philosophers.c \
+			philosophers_cont.c \
 			routines.c \
 			actions.c \
 			fork_actions.c \

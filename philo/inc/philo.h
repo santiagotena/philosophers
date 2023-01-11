@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/11 00:55:16 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:12:22 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ int					parse_args(int argc, char **argv, t_param *param);
 
 // Philosophers //
 int					philosophers(t_param *param);
+
+// Philosopers Continued //
+int					destroy_mutex(t_param *param);
+void				free_values(t_param *param);
 
 // Sole Philosopher //
 void				sole_philo(int time_to_die);

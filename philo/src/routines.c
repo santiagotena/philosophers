@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/11 22:55:42 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:14:49 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	routine_cont(t_philo *philo)
 {
-	// if (philo->philo_id % 2 == 1)
-	// 	ft_sleep(15);
 	while (philo->param->is_philo_dead == 0 && philo->param->hungry_philo > 0)
 	{
-		while (philo->param->is_philo_dead == 0 && philo->param->hungry_philo > 0)
+		while (philo->param->is_philo_dead == 0 && \
+				philo->param->hungry_philo > 0)
 		{
 			if (grab_own_fork(philo) && grab_next_fork(philo))
 			{

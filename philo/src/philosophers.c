@@ -6,31 +6,11 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/11 22:52:57 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:11:22 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	free_values(t_param *param)
-{
-	free(param->th);
-	free(param->philos);
-}
-
-int	destroy_mutex(t_param *param)
-{
-	int		i;
-
-	i = 1;
-	while (i < param->n_philo)
-	{
-		pthread_mutex_destroy(&param->philos->fork_lock);
-		i++;
-	}
-	pthread_mutex_destroy(&param->msg_mutex);
-	return (0);
-}
 
 int	join_threads(t_param *param)
 {
