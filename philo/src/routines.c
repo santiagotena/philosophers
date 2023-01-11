@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/11 23:14:49 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:16:17 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	routine_cont(t_philo *philo)
 				drop_forks(philo);
 				break ;
 			}
-			// else
-			// 	ft_sleep(1);
 		}
 		sleeping(philo);
 		think(philo);
