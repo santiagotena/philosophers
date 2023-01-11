@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/11 03:06:08 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:39:57 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,11 @@ void	*main_routine(void *args)
 			last_meal = get_time_in_ms() - param->philos[i].time_last_meal;
 			if (last_meal >= param->time_to_die)
 			{
-				die(&param->philos[i]);
-				break ;
+				if (param->philos[i].ts_must_eat != 0)
+				{
+					die(&param->philos[i]);
+					break ;
+				}
 			}
 			i++;
 		}
