@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 01:09:58 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 03:57:46 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:57:34 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	philo_sleep(unsigned long long sleep_time, t_param *param)
 	wake_up_time = get_time_in_ms() + sleep_time;
 	while (get_time_in_ms() < wake_up_time)
 	{
-		if (param->is_philo_dead)
+		if (param->is_philo_dead) // Data race
 			break ;
 		ft_sleep(1);
 	}
