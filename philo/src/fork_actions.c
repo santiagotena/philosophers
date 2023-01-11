@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:26:22 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/10 22:01:06 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/11 18:54:34 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ bool	grab_next_fork(t_philo *philo)
 	}
 	else
 	{	
+		pthread_mutex_unlock(&philo_next->fork_lock);
 		pthread_mutex_lock(&philo->fork_lock);
 		philo->is_fork_taken = 0;
 		pthread_mutex_unlock(&philo->fork_lock);
-		pthread_mutex_unlock(&philo_next->fork_lock);
 		return (false);
 	}
 }
@@ -68,6 +68,7 @@ void	drop_forks(t_philo *philo)
 	pthread_mutex_lock(&philo->fork_lock);
 	philo->is_fork_taken = 0;
 	pthread_mutex_unlock(&philo->fork_lock);
-	philo_next->is_fork_taken = 0;
 	pthread_mutex_lock(&philo_next->fork_lock);
+	philo_next->is_fork_taken = 0;
+	pthread_mutex_unlock(&philo_next->fork_lock);
 }
