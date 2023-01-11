@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/11 23:16:17 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:55:07 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ void	*routine(void *args)
 	t_philo		*philo;
 
 	philo = (t_philo *)args;
-	philo->time_last_meal = philo->param->start_time; // Data race
+	pthread_mutex_lock(&philo->param->time_last_meal_mutex);
+	philo->time_last_meal = philo->param->start_time; // Data race done
+	pthread_mutex_unlock(&philo->param->time_last_meal_mutex);
 	routine_cont(philo);
 	return (NULL);
 }
@@ -59,7 +61,9 @@ void	*main_routine(void *args)
 		{
 			if (param->hungry_philo == 0)
 				break ;
-			last_meal = get_time_in_ms() - param->philos[i].time_last_meal; // Data Race
+			pthread_mutex_lock(&param->time_last_meal_mutex);
+			last_meal = get_time_in_ms() - param->philos[i].time_last_meal; // Data Race done
+			pthread_mutex_unlock(&param->time_last_meal_mutex);
 			if (last_meal >= param->time_to_die)
 			{
 				die(&param->philos[i]);
