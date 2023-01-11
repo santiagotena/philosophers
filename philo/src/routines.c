@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/11 19:22:43 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:04:31 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	routine_cont(t_philo *philo)
 {
 	// if (philo->philo_id % 2 == 1)
 	// 	ft_sleep(1);
-	while (philo->param->is_philo_dead == 0)
+	while (philo->param->is_philo_dead == 0 && philo->param->hungry_philo > 0)
 	{
-		while (philo->param->is_philo_dead == 0)
+		while (philo->param->is_philo_dead == 0 && philo->param->hungry_philo > 0)
 		{
 			if (grab_own_fork(philo) && grab_next_fork(philo))
 			{
@@ -33,10 +33,7 @@ void	routine_cont(t_philo *philo)
 		sleeping(philo);
 		think(philo);
 		if (philo->param->is_times_must_eat && philo->ts_must_eat == 0)
-		{
 			philo->param->hungry_philo--;
-			break ;
-		}
 	}
 }
 
@@ -68,11 +65,8 @@ void	*main_routine(void *args)
 			last_meal = get_time_in_ms() - param->philos[i].time_last_meal;
 			if (last_meal >= param->time_to_die)
 			{
-				if (param->philos[i].ts_must_eat != 0)
-				{
-					die(&param->philos[i]);
-					break ;
-				}
+				die(&param->philos[i]);
+				break ;
 			}
 			i++;
 		}
