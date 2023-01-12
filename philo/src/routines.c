@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/12 01:55:27 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/12 02:41:28 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ void	routine_cont(t_philo *philo)
 		sleeping(philo);
 		think(philo);
 		if (philo->param->is_times_must_eat && philo->ts_must_eat == 0)
+		{
+			pthread_mutex_lock(&philo->param->hungry_philo_mutex);
 			philo->param->hungry_philo--;
+			pthread_mutex_lock(&philo->param->hungry_philo_mutex);
+		}
 	}
 }
 
@@ -59,7 +63,7 @@ void	*main_routine(void *args)
 		i = 1;
 		while (i <= param->n_philo)
 		{
-			if (param->hungry_philo == 0)
+			if (are_all_full(param))
 				break ;
 			pthread_mutex_lock(&param->time_last_meal_mutex);
 			last_meal = get_time_in_ms() - param->philos[i].time_last_meal; // Data Race done

@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 01:31:35 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/12 01:49:50 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/12 02:40:45 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,18 @@ bool	is_any_hungry(t_param *param)
 	result = false;
 	pthread_mutex_lock(&param->hungry_philo_mutex);
 	if (param->hungry_philo > 0)
+		result = true;
+	pthread_mutex_unlock(&param->hungry_philo_mutex);
+	return (result);
+}
+
+bool	are_all_full(t_param *param)
+{
+	bool result;
+	
+	result = false;
+	pthread_mutex_lock(&param->hungry_philo_mutex);
+	if (param->hungry_philo == 0)
 		result = true;
 	pthread_mutex_unlock(&param->hungry_philo_mutex);
 	return (result);

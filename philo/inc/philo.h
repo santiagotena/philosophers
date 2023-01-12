@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/12 01:44:55 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/12 02:41:03 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void				drop_forks(t_philo *philo);
 // Conditionals //
 bool				are_all_alive(t_param *param);
 bool				is_any_hungry(t_param *param);
+bool				are_all_full(t_param *param);
 
 // Utils //
 unsigned long long	get_time_in_ms(void);
