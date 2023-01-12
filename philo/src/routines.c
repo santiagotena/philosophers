@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/12 01:46:28 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/12 01:55:27 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	*main_routine(void *args)
 
 	param = (t_param *)args;
 	ft_sleep(param->time_to_die / 2);
-	while (param->is_philo_dead == 0 && param->hungry_philo > 0)
+	while (are_all_alive(param) && is_any_hungry(param))
 	{
 		i = 1;
 		while (i <= param->n_philo)
