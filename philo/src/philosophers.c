@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/11 23:35:04 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/12 23:06:27 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	init_mutex(t_param *param)
 		pthread_mutex_init(&param->philos->fork_lock, NULL);
 	pthread_mutex_init(&param->msg_mutex, NULL);
 	pthread_mutex_init(&param->is_fork_taken_mutex, NULL);
+	pthread_mutex_init(&param->time_to_die_mutex, NULL);
 	pthread_mutex_init(&param->time_last_meal_mutex, NULL);
 	pthread_mutex_init(&param->is_philo_dead_mutex, NULL);
 	return (0);
