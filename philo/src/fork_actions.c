@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:26:22 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/12 19:03:25 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/12 19:21:01 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ bool	grab_own_fork(t_philo *philo)
 {
 	bool	result;
 
-	pthread_mutex_lock(&philo->fork_lock);
+	// pthread_mutex_lock(&philo->fork_lock);
 	result = is_fork_available(philo);
-	pthread_mutex_unlock(&philo->fork_lock);
+	// pthread_mutex_unlock(&philo->fork_lock);
 	if (result)
 	{
 		pthread_mutex_lock(&philo->fork_lock);
@@ -40,9 +40,9 @@ bool	grab_next_fork(t_philo *philo)
 		philo_next = &philo->param->philos[1];
 	else
 		philo_next = &philo->param->philos[philo_id + 1];
-	pthread_mutex_lock(&philo_next->fork_lock);
+	// pthread_mutex_lock(&philo_next->fork_lock);
 	result = is_fork_available(philo_next);
-	pthread_mutex_lock(&philo_next->fork_lock);
+	// pthread_mutex_unlock(&philo_next->fork_lock);
 	if (result)
 	{
 		pthread_mutex_lock(&philo_next->fork_lock);
