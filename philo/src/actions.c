@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:41:06 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/12 02:30:29 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/12 03:22:24 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->param->msg_mutex);
 	time = get_time_in_ms() - philo->param->start_time;
 	printf("%llu ms: %d is eating\n", time, philo->philo_id);
-	philo->time_last_meal = get_time_in_ms();
 	philo->ts_must_eat--;
 	pthread_mutex_unlock(&philo->param->msg_mutex);
+	pthread_mutex_lock(&philo->param->time_last_meal_mutex);
+	philo->time_last_meal = get_time_in_ms();
+	pthread_mutex_unlock(&philo->param->time_last_meal_mutex);
 	philo_sleep(philo->param->time_to_eat, philo->param);
 }
 
