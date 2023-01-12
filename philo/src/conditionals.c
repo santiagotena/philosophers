@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 01:31:35 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/12 02:54:05 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/12 03:05:50 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 bool	are_all_alive(t_param *param)
 {
-	bool result;
-	
+	bool	result;
+
 	result = false;
 	pthread_mutex_lock(&param->is_philo_dead_mutex);
 	if (param->is_philo_dead == 0)
@@ -26,8 +26,8 @@ bool	are_all_alive(t_param *param)
 
 bool	is_any_hungry(t_param *param)
 {
-	bool result;
-	
+	bool	result;
+
 	result = false;
 	pthread_mutex_lock(&param->hungry_philo_mutex);
 	if (param->hungry_philo > 0)
@@ -38,8 +38,8 @@ bool	is_any_hungry(t_param *param)
 
 bool	are_all_full(t_param *param)
 {
-	bool result;
-	
+	bool	result;
+
 	result = false;
 	pthread_mutex_lock(&param->hungry_philo_mutex);
 	if (param->hungry_philo == 0)
@@ -50,8 +50,8 @@ bool	are_all_full(t_param *param)
 
 bool	is_fork_available(t_philo *philo)
 {
-	bool result;
-	
+	bool	result;
+
 	result = false;
 	pthread_mutex_lock(&philo->fork_lock);
 	if (philo->is_fork_taken == 0)
