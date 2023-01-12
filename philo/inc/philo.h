@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/12 21:59:16 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/12 23:15:25 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_param
 	pthread_mutex_t		msg_mutex;
 	pthread_mutex_t		is_fork_taken_mutex;
 	pthread_mutex_t		time_last_meal_mutex;
+	pthread_mutex_t		time_to_die_mutex;
 	pthread_mutex_t		hungry_philo_mutex;
 	pthread_mutex_t		is_philo_dead_mutex;
 	int					is_philo_dead;
@@ -86,6 +87,7 @@ void				drop_forks(t_philo *philo);
 bool				are_all_alive(t_param *param);
 bool				is_any_hungry(t_param *param);
 bool				are_all_full(t_param *param);
+bool				is_time_to_die(unsigned long long last_meal, t_philo *philo);
 // bool				is_fork_available(t_philo *philo);
 
 // Utils //
