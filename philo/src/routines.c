@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/12 22:17:46 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/12 23:21:56 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,11 @@ void	*main_routine(void *args)
 			pthread_mutex_lock(&param->time_last_meal_mutex);
 			last_meal = get_time_in_ms() - param->philos[i].time_last_meal;
 			pthread_mutex_unlock(&param->time_last_meal_mutex);
-			if (last_meal >= param->time_to_die) // PROTECC
+			if (is_time_to_die(last_meal, &param->philos[i]))
 			{
+				pthread_mutex_lock(&param->is_philo_dead_mutex);
+				param->is_philo_dead = 1;
+				pthread_mutex_unlock(&param->is_philo_dead_mutex);
 				die(&param->philos[i]);
 				break ;
 			}
