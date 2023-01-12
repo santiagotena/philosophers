@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:41:06 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/12 00:42:42 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/12 02:30:29 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	take_fork(t_philo *philo)
 {	
 	unsigned long long	time;
 
-	if (philo->param->is_philo_dead == 1)
+	if (!are_all_alive(philo->param))
 		return ;
 	pthread_mutex_lock(&philo->param->msg_mutex);
 	time = get_time_in_ms() - philo->param->start_time;
@@ -28,7 +28,7 @@ void	eat(t_philo *philo)
 {
 	unsigned long long	time;
 
-	if (philo->param->is_philo_dead == 1)
+	if (!are_all_alive(philo->param))
 		return ;
 	pthread_mutex_lock(&philo->param->msg_mutex);
 	time = get_time_in_ms() - philo->param->start_time;
@@ -43,7 +43,7 @@ void	sleeping(t_philo *philo)
 {
 	unsigned long long	time;
 
-	if (philo->param->is_philo_dead == 1)
+	if (!are_all_alive(philo->param))
 		return ;
 	pthread_mutex_lock(&philo->param->msg_mutex);
 	time = get_time_in_ms() - philo->param->start_time;
@@ -57,7 +57,7 @@ void	think(t_philo *philo)
 	unsigned long long	time;
 	unsigned long long	time_to_think;
 
-	if (philo->param->is_philo_dead == 1)
+	if (!are_all_alive(philo->param))
 		return ;
 	pthread_mutex_lock(&philo->param->msg_mutex);
 	time = get_time_in_ms() - philo->param->start_time;
@@ -66,8 +66,6 @@ void	think(t_philo *philo)
 					(get_time_in_ms() - philo->time_last_meal) \
 					- philo->param->time_to_eat) / 2;
 	pthread_mutex_unlock(&philo->param->msg_mutex);
-	if (philo->param->is_times_must_eat == 0)
-		return ;
 	ft_sleep(time_to_think);
 }
 
@@ -76,7 +74,7 @@ void	die(t_philo *philo)
 	unsigned long long	time;
 
 	pthread_mutex_lock(&philo->param->is_philo_dead_mutex);
-	philo->param->is_philo_dead = 1; // Data race done
+	philo->param->is_philo_dead = 1;
 	pthread_mutex_unlock(&philo->param->is_philo_dead_mutex);
 	pthread_mutex_lock(&philo->param->msg_mutex);
 	time = get_time_in_ms() - philo->param->start_time;
