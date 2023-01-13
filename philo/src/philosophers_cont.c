@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:11:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/13 04:29:27 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/13 05:34:19 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	destroy_mutex(t_param *param)
 	pthread_mutex_destroy(&param->time_to_die_mutex);
 	pthread_mutex_destroy(&param->hungry_philo_mutex);
 	pthread_mutex_destroy(&param->is_philo_dead_mutex);
+	pthread_mutex_destroy(&param->read_write_mutex);
 	// pthread_mutex_destroy(&param->is_fork_taken_mutex);
 	return (0);
 }
