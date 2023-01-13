@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:26:22 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/13 02:19:53 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/13 03:48:13 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ bool	grab_own_fork(t_philo *philo)
 	{
 		// pthread_mutex_lock(&philo->fork_lock);
 		philo->is_fork_taken = 1; // DR
+		take_fork(philo);
 		// pthread_mutex_unlock(&philo->fork_lock);
 		result = true;
 	}
