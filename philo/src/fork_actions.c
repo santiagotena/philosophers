@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:26:22 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/13 01:28:39 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/13 02:19:53 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@ bool	grab_own_fork(t_philo *philo)
 {
 	bool	result;
 
-	// pthread_mutex_lock(&philo->fork_lock);
+	pthread_mutex_lock(&philo->fork_lock);
 	result = is_fork_available(philo);
 	// pthread_mutex_unlock(&philo->fork_lock);
 	if (result)
 	{
-		pthread_mutex_lock(&philo->fork_lock);
+		// pthread_mutex_lock(&philo->fork_lock);
 		philo->is_fork_taken = 1; // DR
-		pthread_mutex_unlock(&philo->fork_lock);
+		// pthread_mutex_unlock(&philo->fork_lock);
 		result = true;
 	}
 	return (result);
@@ -44,12 +44,12 @@ bool	grab_next_fork(t_philo *philo)
 	{
 		pthread_mutex_lock(&philo_next->fork_lock);
 		philo_next->is_fork_taken = 1; // DR
-		pthread_mutex_unlock(&philo_next->fork_lock);
+		// pthread_mutex_unlock(&philo_next->fork_lock);
 		result = true;
 	}
 	else
 	{
-		pthread_mutex_lock(&philo->fork_lock);
+		// pthread_mutex_lock(&philo->fork_lock);
 		philo->is_fork_taken = 0;
 		pthread_mutex_unlock(&philo->fork_lock);
 		result = false;
@@ -65,10 +65,10 @@ void	drop_forks(t_philo *philo)
 		philo_next = &philo->param->philos[1];
 	else
 		philo_next = &philo->param->philos[philo_id + 1];
-	pthread_mutex_lock(&philo->fork_lock);
+	// pthread_mutex_lock(&philo->fork_lock);
 	philo->is_fork_taken = 0; // DR
 	pthread_mutex_unlock(&philo->fork_lock);
-	pthread_mutex_lock(&philo_next->fork_lock);
+	// pthread_mutex_lock(&philo_next->fork_lock);
 	philo_next->is_fork_taken = 0; // DR
 	pthread_mutex_unlock(&philo_next->fork_lock);
 }
