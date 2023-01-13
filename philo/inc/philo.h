@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/13 03:42:37 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/13 04:09:03 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_param
 	unsigned long long	start_time;
 	t_philo				*philos;
 	pthread_t			*th;
-	pthread_mutex_t		*forks;
+	pthread_mutex_t		*forks_mutex;
 	// pthread_mutex_t		is_fork_taken_mutex;
 	pthread_mutex_t		msg_mutex;
 	pthread_mutex_t		time_last_meal_mutex;
