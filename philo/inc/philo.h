@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/13 05:33:18 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/13 06:13:21 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ bool				are_all_alive(t_param *param);
 bool				is_any_hungry(t_param *param);
 bool				are_all_full(t_param *param);
 bool				is_time_to_die(unsigned long long last_meal, t_philo *philo);
-bool				is_fork_available(t_philo *philo);
+bool				is_fork_available(int is_fork_taken);
 
 // Utils //
 unsigned long long	get_time_in_ms(void);
