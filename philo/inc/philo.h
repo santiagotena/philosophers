@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/13 06:13:21 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/13 18:13:53 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_param
 	int					*is_fork_taken;
 	pthread_t			*th;
 	pthread_mutex_t		*forks_mutex;
+	pthread_mutex_t		*own_fork_mutex;
+	pthread_mutex_t		*next_fork_mutex;
 	// pthread_mutex_t		is_fork_taken_mutex;
 	pthread_mutex_t		msg_mutex;
 	pthread_mutex_t		time_last_meal_mutex;
