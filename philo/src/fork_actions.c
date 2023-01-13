@@ -6,22 +6,30 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:26:22 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/13 04:11:54 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/13 05:12:50 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 bool	grab_own_fork(t_philo *philo)
 {
-	bool	result;
+	bool				result;
+	pthread_mutex_t		*forks_mutex;
+	int					*forks;
+	int					philo_id;
+	int					next_philo_id;
 
-	pthread_mutex_lock(&philo->param->forks_mutex[philo->philo_id]);
-	result = is_fork_available(philo);
+	forks_mutex = philo->param->forks_mutex;
+	forks = philo->param->is_fork_taken;
+	philo_id = philo->philo_id;
+	next_philo_id = philo->next_philo_id;
+	result = false;
+	pthread_mutex_lock(&forks_mutex[philo_id]);
 	// pthread_mutex_unlock(&philo->fork_lock);
-	if (result)
+	if (forks[philo_id] == 0)
 	{
 		// pthread_mutex_lock(&philo->fork_lock);
-		philo->is_fork_taken = 1; // DR
+		forks[philo_id] = 1; // DR
 		take_fork(philo);
 		// pthread_mutex_unlock(&philo->fork_lock);
 		result = true;
@@ -30,46 +38,52 @@ bool	grab_own_fork(t_philo *philo)
 }
 bool	grab_next_fork(t_philo *philo)
 {
-	t_philo		*philo_next;
-	int			philo_id;
-	bool		result;
+	bool				result;
+	pthread_mutex_t		*forks_mutex;
+	int					*forks;
+	int					philo_id;
+	int					next_philo_id;
+
+	forks_mutex = philo->param->forks_mutex;
+	forks = philo->param->is_fork_taken;
 	philo_id = philo->philo_id;
-	if (philo_id == philo->param->n_philo)
-		philo_next = &philo->param->philos[1];
-	else
-		philo_next = &philo->param->philos[philo_id + 1];
-	// pthread_mutex_lock(&philo_next->fork_lock);
-	result = is_fork_available(philo_next);
+	next_philo_id = philo->next_philo_id;
+	result = false;
+	pthread_mutex_lock(&forks_mutex[next_philo_id]);
+	// result = is_fork_available(philo_next);
 	// pthread_mutex_unlock(&philo_next->fork_lock);
-	if (result)
+	if (forks[next_philo_id] == 0)
 	{
-		pthread_mutex_lock(&philo->param->forks_mutex[philo->next_philo_id]);
-		philo_next->is_fork_taken = 1; // DR
+		// pthread_mutex_lock(&philo->param->forks_mutex[philo->next_philo_id]);
+		forks[next_philo_id] = 1; // DR
+		take_fork(philo);
 		// pthread_mutex_unlock(&philo_next->fork_lock);
 		result = true;
 	}
 	else
 	{
 		// pthread_mutex_lock(&philo->fork_lock);
-		philo->is_fork_taken = 0;
-		pthread_mutex_unlock(&philo->param->forks_mutex[philo->philo_id]);
+		forks[philo_id] = 0;
+		pthread_mutex_unlock(&forks_mutex[philo_id]);
 		result = false;
 	}
 	return (result);
 }
 void	drop_forks(t_philo *philo)
 {
-	t_philo		*philo_next;
-	int			philo_id;
+	pthread_mutex_t		*forks_mutex;
+	int					*forks;
+	int					philo_id;
+	int					next_philo_id;
+
+	forks_mutex = philo->param->forks_mutex;
+	forks = philo->param->is_fork_taken;
 	philo_id = philo->philo_id;
-	if (philo_id == philo->param->n_philo)
-		philo_next = &philo->param->philos[1];
-	else
-		philo_next = &philo->param->philos[philo_id + 1];
+	next_philo_id = philo->next_philo_id;
 	// pthread_mutex_lock(&philo->fork_lock);
-	philo->is_fork_taken = 0; // DR
-	pthread_mutex_unlock(&philo->param->forks_mutex[philo->philo_id]);
+	forks[philo_id] = 0; // DR
+	pthread_mutex_unlock(&forks_mutex[philo_id]);
 	// pthread_mutex_lock(&philo_next->fork_lock);
-	philo_next->is_fork_taken = 0; // DR
-	pthread_mutex_unlock(&philo->param->forks_mutex[philo->next_philo_id]);
+	forks[next_philo_id] = 0; // DR
+	pthread_mutex_unlock(&forks_mutex[next_philo_id]);
 }

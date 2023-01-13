@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:11:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/13 04:12:03 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/13 04:29:27 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	destroy_mutex(t_param *param)
 	i = 1;
 	while (i <= param->n_philo)
 	{
-		pthread_mutex_destroy(&param->philos[i].fork_lock);
+		// pthread_mutex_destroy(&param->philos[i].fork_lock);
 		pthread_mutex_destroy(&param->forks_mutex[i]);
 		i++;
 	}
