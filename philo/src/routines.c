@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/13 00:31:59 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/13 01:17:51 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	routine_cont(t_philo *philo)
 		think(philo);
 		if (philo->param->is_times_must_eat && philo->ts_must_eat == 0)
 		{
-			pthread_mutex_lock(&philo->param->hungry_philo_mutex);
+			// pthread_mutex_lock(&philo->param->hungry_philo_mutex);
 			philo->param->hungry_philo--;
-			pthread_mutex_unlock(&philo->param->hungry_philo_mutex);
+			// pthread_mutex_unlock(&philo->param->hungry_philo_mutex);
 		}
 	}
 }
