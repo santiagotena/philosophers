@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:26:22 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/14 04:36:00 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/14 05:06:52 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ bool	grab_own_fork(t_philo *philo)
 	forks = philo->param->is_fork_taken;
 	philo_id = philo->philo_id;
 	pthread_mutex_lock(&forks_mutex[philo_id]);
+	pthread_mutex_lock(&philo->param->grab_drop_mutex);
 	pthread_mutex_lock(&philo->param->read_write_mutex);
 	result = is_fork_available(forks[philo_id]); // DR
 	if (result)
@@ -31,6 +32,7 @@ bool	grab_own_fork(t_philo *philo)
 		result = true;
 	}
 	pthread_mutex_unlock(&philo->param->read_write_mutex);
+	pthread_mutex_unlock(&philo->param->grab_drop_mutex);
 	return (result);
 }
 
@@ -48,6 +50,7 @@ bool	grab_next_fork(t_philo *philo)
 	next_philo_id = philo->next_philo_id;
 	result = false;
 	pthread_mutex_lock(&forks_mutex[next_philo_id]);
+	pthread_mutex_lock(&philo->param->grab_drop_mutex);
 	pthread_mutex_lock(&philo->param->read_write_mutex);
 	result = is_fork_available(forks[next_philo_id]); // DR
 	if (result)
@@ -55,12 +58,14 @@ bool	grab_next_fork(t_philo *philo)
 		forks[next_philo_id] = 1; // DR
 		take_fork(philo);
 		pthread_mutex_unlock(&philo->param->read_write_mutex);
+		pthread_mutex_unlock(&philo->param->grab_drop_mutex);
 		result = true;
 	}
 	else
 	{
 		forks[philo_id] = 0; // DR
 		pthread_mutex_unlock(&philo->param->read_write_mutex);
+		pthread_mutex_unlock(&philo->param->grab_drop_mutex);
 		pthread_mutex_unlock(&forks_mutex[philo_id]);
 		result = false;
 	}
@@ -78,13 +83,21 @@ void	drop_forks(t_philo *philo)
 	philo_id = philo->philo_id;
 	next_philo_id = philo->next_philo_id;
 	
+	pthread_mutex_lock(&philo->param->grab_drop_mutex);
+	
 	pthread_mutex_lock(&philo->param->read_write_mutex);
 	forks[philo_id] = 0; // DR
 	pthread_mutex_unlock(&philo->param->read_write_mutex);
-	pthread_mutex_unlock(&forks_mutex[philo_id]);
+
+	// pthread_mutex_unlock(&philo->param->grab_drop_mutex);
+	// pthread_mutex_lock(&philo->param->grab_drop_mutex);
 
 	pthread_mutex_lock(&philo->param->read_write_mutex);
 	forks[next_philo_id] = 0; // DR
 	pthread_mutex_unlock(&philo->param->read_write_mutex);
+	
+	pthread_mutex_unlock(&philo->param->grab_drop_mutex);
+	
 	pthread_mutex_unlock(&forks_mutex[next_philo_id]);
+	pthread_mutex_unlock(&forks_mutex[philo_id]);
 }
