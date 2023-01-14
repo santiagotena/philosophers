@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:26:22 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/14 16:55:03 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/14 18:52:02 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ bool	grab_own_fork(t_philo *philo)
 	forks_mutex = philo->param->forks_mutex;
 	forks = philo->param->is_fork_taken;
 	philo_id = philo->philo_id;
+	pthread_mutex_lock(&philo->param->forks_mutex[philo_id]);
 	result = is_fork_available(forks[philo_id]); // DR
 	if (result)
 	{
-		forks[philo_id] = 1; // DR
+		forks[philo_id] = 1;
 		take_fork(philo);
 		result = true;
 	}
+	// pthread_mutex_unlock(&philo->param->forks_mutex[philo_id]);
 	return (result);
 }
 
@@ -44,19 +46,21 @@ bool	grab_next_fork(t_philo *philo)
 	philo_id = philo->philo_id;
 	next_philo_id = philo->next_philo_id;
 	result = false;
-	result = is_fork_available(forks[next_philo_id]); // DR
+	// pthread_mutex_lock(&philo->param->forks_mutex[philo_id]);
+	pthread_mutex_lock(&philo->param->forks_mutex[next_philo_id]);
+	result = is_fork_available(forks[next_philo_id]);
 	if (result)
 	{
-		forks[next_philo_id] = 1; // DR
+		forks[next_philo_id] = 1;
 		take_fork(philo);
 
 		result = true;
 	}
 	else
 	{
-
-		forks[philo_id] = 0; // DR
-
+		pthread_mutex_unlock(&philo->param->forks_mutex[next_philo_id]);
+		forks[philo_id] = 0;
+		pthread_mutex_unlock(&philo->param->forks_mutex[philo_id]);
 		result = false;
 	}
 	return (result);
@@ -76,6 +80,8 @@ void	drop_forks(t_philo *philo)
 
 	forks[philo_id] = 0; // DR
 
-	forks[next_philo_id] = 0; // DR
+	forks[next_philo_id] = 0;
 
+	pthread_mutex_unlock(&philo->param->forks_mutex[next_philo_id]);
+	pthread_mutex_unlock(&philo->param->forks_mutex[philo_id]);
 }
