@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/14 19:20:59 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/15 00:22:45 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ void	init_values(t_param *param)
 int	philosophers(t_param *param)
 {
 	init_values(param);
-	if (init_threads(param) < 0)
-		return (-1);
 	if (init_mutex(param) < 0)
+		return (-1);
+	if (init_threads(param) < 0)
 		return (-1);
 	if (join_threads(param) < 0)
 		return (-1);
