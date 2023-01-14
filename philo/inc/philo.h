@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/14 05:39:11 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/14 06:05:03 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_param
 	pthread_mutex_t		time_to_die_mutex;
 	pthread_mutex_t		hungry_philo_mutex;
 	pthread_mutex_t		is_philo_dead_mutex;
+	pthread_mutex_t		pre_post_meal_mutex;
 	pthread_mutex_t		grab_drop_mutex;
 	pthread_mutex_t		read_write_mutex;
 	pthread_mutex_t		is_fork_taken_mutex;
