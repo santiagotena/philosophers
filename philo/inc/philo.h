@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/14 04:32:48 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/14 05:39:11 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ typedef struct s_philo
 	int					next_philo_id;
 	int					ts_must_eat;
 	unsigned long long	time_last_meal;
-	// pthread_mutex_t		fork_lock; // Delete?
-	// int					is_fork_taken; // Delete?
 }						t_philo;
 
 typedef struct s_param
@@ -42,21 +40,21 @@ typedef struct s_param
 	int					times_must_eat;
 	int					is_times_must_eat;
 	unsigned long long	start_time;
+	pthread_t			*th;
 	t_philo				*philos;
 	int					*is_fork_taken;
-	pthread_t			*th;
 	pthread_mutex_t		*forks_mutex;
-	// pthread_mutex_t		own_fork_mutex;
-	// pthread_mutex_t		next_fork_mutex;
-	// pthread_mutex_t		is_fork_taken_mutex;
 	pthread_mutex_t		msg_mutex;
 	pthread_mutex_t		time_last_meal_mutex;
 	pthread_mutex_t		time_to_die_mutex;
 	pthread_mutex_t		hungry_philo_mutex;
 	pthread_mutex_t		is_philo_dead_mutex;
-	pthread_mutex_t		read_write_mutex;
-	pthread_mutex_t		shared_fork_mutex;
 	pthread_mutex_t		grab_drop_mutex;
+	pthread_mutex_t		read_write_mutex;
+	pthread_mutex_t		is_fork_taken_mutex;
+	// pthread_mutex_t		own_fork_mutex;
+	// pthread_mutex_t		next_fork_mutex;
+	// pthread_mutex_t		shared_fork_mutex;
 	int					is_philo_dead;
 	int					hungry_philo;
 }						t_param;
