@@ -6,30 +6,65 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/14 05:41:09 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/14 22:44:59 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// void	routine_cont(t_philo *philo)
+// {
+// 	if (philo->philo_id % 2 == 0)
+// 		ft_sleep(1);
+// 	while (are_all_alive(philo->param) && is_any_hungry(philo->param))
+// 	{
+// 		while (are_all_alive(philo->param) && \
+// 				is_any_hungry(philo->param))
+// 		{
+// 			if (grab_own_fork(philo) && grab_next_fork(philo))
+// 			{
+// 				eat(philo);
+// 				drop_forks(philo);
+// 				break ;
+// 			}
+// 			else
+// 				ft_sleep(1);
+// 		}
+// 		sleeping(philo);
+// 		think(philo);
+// 		if (philo->param->is_times_must_eat && philo->ts_must_eat == 0)
+// 		{
+// 			pthread_mutex_lock(&philo->param->hungry_philo_mutex);
+// 			philo->param->hungry_philo--;
+// 			pthread_mutex_unlock(&philo->param->hungry_philo_mutex);
+// 		}
+// 	}
+// }
+
 void	routine_cont(t_philo *philo)
 {
-	if (philo->philo_id % 2 == 0)
+		pthread_mutex_t		*forks_mutex;
+		int					*forks;
+		int					philo_id;
+		int					next_philo_id;
+
+		forks_mutex = philo->param->forks_mutex;
+		forks = philo->param->is_fork_taken;
+		philo_id = philo->philo_id;
+		next_philo_id = philo->next_philo_id;
+	if (philo->philo_id % 2 == 1)
 		ft_sleep(1);
 	while (are_all_alive(philo->param) && is_any_hungry(philo->param))
 	{
-		while (are_all_alive(philo->param) && \
-				is_any_hungry(philo->param))
-		{
-			if (grab_own_fork(philo) && grab_next_fork(philo))
-			{
-				eat(philo);
-				drop_forks(philo);
-				break ;
-			}
-			else
-				ft_sleep(1);
-		}
+		pthread_mutex_lock(&philo->param->forks_mutex[philo_id]);
+		take_fork(philo);
+		pthread_mutex_lock(&philo->param->forks_mutex[next_philo_id]);
+		take_fork(philo);
+		eat(philo);
+		sleeping(philo);
+		think(philo);
+		pthread_mutex_lock(&philo->param->forks_mutex[next_philo_id]);
+		pthread_mutex_unlock(&philo->param->forks_mutex[philo_id]);
 		sleeping(philo);
 		think(philo);
 		if (philo->param->is_times_must_eat && philo->ts_must_eat == 0)
