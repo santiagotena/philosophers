@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 01:31:35 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/15 02:40:21 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/15 02:59:00 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ bool	are_all_alive(t_param *param)
 	bool	result;
 
 	result = false;
-	pthread_mutex_lock(&param->death_check_mutex);
+	// pthread_mutex_lock(&param->death_check_mutex);
 	pthread_mutex_lock(&param->is_philo_dead_mutex);
 	if (param->is_philo_dead == 0)
 		result = true;
 	pthread_mutex_unlock(&param->is_philo_dead_mutex);
-	pthread_mutex_unlock(&param->death_check_mutex);
+	// pthread_mutex_unlock(&param->death_check_mutex);
 	return (result);
 }
 
