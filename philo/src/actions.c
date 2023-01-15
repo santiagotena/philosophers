@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:41:06 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/13 01:39:45 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/15 01:52:36 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	die(t_philo *philo)
 {
 	unsigned long long	time;
 	
-	// pthread_mutex_lock(&philo->param->msg_mutex);
+	pthread_mutex_lock(&philo->param->msg_mutex);
 	time = get_time_in_ms() - philo->param->start_time;
 	printf("%llu ms: %d died\n", time, philo->philo_id);
-	// pthread_mutex_unlock(&philo->param->msg_mutex);
+	pthread_mutex_unlock(&philo->param->msg_mutex);
 }
