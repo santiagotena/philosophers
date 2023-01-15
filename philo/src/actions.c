@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:41:06 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/15 01:52:36 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/15 03:06:38 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ void	take_fork(t_philo *philo)
 {	
 	unsigned long long	time;
 
-	if (!are_all_alive(philo->param))
-		return ;
 	pthread_mutex_lock(&philo->param->msg_mutex);
+	if (!are_all_alive(philo->param))
+	{
+		pthread_mutex_unlock(&philo->param->msg_mutex);
+		return ;
+	}
 	time = get_time_in_ms() - philo->param->start_time;
 	printf("%llu ms: %d has taken a fork\n", time, philo->philo_id);
 	pthread_mutex_unlock(&philo->param->msg_mutex);
@@ -28,9 +31,12 @@ void	eat(t_philo *philo)
 {
 	unsigned long long	time;
 
-	if (!are_all_alive(philo->param))
-		return ;
 	pthread_mutex_lock(&philo->param->msg_mutex);
+	if (!are_all_alive(philo->param))
+	{
+		pthread_mutex_unlock(&philo->param->msg_mutex);
+		return ;
+	}
 	time = get_time_in_ms() - philo->param->start_time;
 	printf("%llu ms: %d is eating\n", time, philo->philo_id);
 	philo->ts_must_eat--;
@@ -45,9 +51,12 @@ void	sleeping(t_philo *philo)
 {
 	unsigned long long	time;
 
-	if (!are_all_alive(philo->param))
-		return ;
 	pthread_mutex_lock(&philo->param->msg_mutex);
+	if (!are_all_alive(philo->param))
+	{
+		pthread_mutex_unlock(&philo->param->msg_mutex);
+		return ;
+	}
 	time = get_time_in_ms() - philo->param->start_time;
 	printf("%llu ms: %d is sleeping\n", time, philo->philo_id);
 	pthread_mutex_unlock(&philo->param->msg_mutex);
@@ -59,9 +68,12 @@ void	think(t_philo *philo)
 	unsigned long long	time;
 	unsigned long long	time_to_think;
 
-	if (!are_all_alive(philo->param))
-		return ;
 	pthread_mutex_lock(&philo->param->msg_mutex);
+	if (!are_all_alive(philo->param))
+	{
+		pthread_mutex_unlock(&philo->param->msg_mutex);
+		return ;
+	}
 	time = get_time_in_ms() - philo->param->start_time;
 	printf("%llu ms: %d is thinking\n", time, philo->philo_id);
 	pthread_mutex_unlock(&philo->param->msg_mutex);
@@ -77,8 +89,8 @@ void	die(t_philo *philo)
 {
 	unsigned long long	time;
 	
-	pthread_mutex_lock(&philo->param->msg_mutex);
+	// pthread_mutex_lock(&philo->param->msg_mutex);
 	time = get_time_in_ms() - philo->param->start_time;
 	printf("%llu ms: %d died\n", time, philo->philo_id);
-	pthread_mutex_unlock(&philo->param->msg_mutex);
+	// pthread_mutex_unlock(&philo->param->msg_mutex);
 }
