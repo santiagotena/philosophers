@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 17:26:22 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/15 03:45:19 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/15 04:19:19 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,18 @@ bool	grab_next_fork(t_philo *philo)
 	forks = philo->param->is_fork_taken;
 	philo_id = philo->philo_id;
 	next_philo_id = philo->next_philo_id;
-	result = false;
 	pthread_mutex_lock(&forks_mutex[next_philo_id]);
 	result = is_fork_available(forks[next_philo_id]);
 	if (result)
 	{
 		forks[next_philo_id] = 1;
 		take_fork(philo);
-		result = true;
 	}
 	else
 	{
 		pthread_mutex_unlock(&forks_mutex[next_philo_id]);
 		forks[philo_id] = 0;
 		pthread_mutex_unlock(&forks_mutex[philo_id]);
-		result = false;
 	}
 	return (result);
 }
