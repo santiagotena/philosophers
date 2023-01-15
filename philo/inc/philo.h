@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 20:11:34 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/15 03:36:27 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/15 04:45:29 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_param
 	int					times_must_eat;
 	int					is_times_must_eat;
 	unsigned long long	start_time;
+	int					is_philo_dead;
+	int					hungry_philo;
 	pthread_t			*th;
 	t_philo				*philos;
 	int					*is_fork_taken;
@@ -56,8 +58,6 @@ typedef struct s_param
 	pthread_mutex_t		time_to_die_mutex;
 	pthread_mutex_t		hungry_philo_mutex;
 	pthread_mutex_t		is_philo_dead_mutex;
-	int					is_philo_dead;
-	int					hungry_philo;
 }						t_param;
 
 /* Functions */
@@ -98,9 +98,11 @@ bool				is_time_to_die(unsigned long long last_meal, \
 						t_philo *philo);
 bool				is_fork_available(int is_fork_taken);
 
-// Utils //
+// Sleep //
 unsigned long long	get_time_in_ms(void);
 void				ft_sleep(int ms);
+
+// Get Time //
 void				philo_sleep(unsigned long long sleep_time, t_param *param);
 
 #endif

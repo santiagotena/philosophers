@@ -6,13 +6,14 @@
 #    By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 23:26:30 by stena-he          #+#    #+#              #
-#    Updated: 2023/01/13 18:44:43 by stena-he         ###   ########.fr        #
+#    Updated: 2023/01/15 04:50:08 by stena-he         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= a.out
+NAME	= philo
 CC		= gcc
-CFLAGS	= -Werror -Wall -Wextra -pthread -g #-fsanitize=thread
+CFLAGS	= -Werror -Wall -Wextra -pthread -g
+# CFLAGS	= -Werror -Wall -Wextra -pthread -g -fsanitize=thread
 
 SRC_PATH = src/
 OBJ_PATH = obj/
@@ -27,7 +28,8 @@ SRC		=	main.c \
 			actions.c \
 			fork_actions.c \
 			conditionals.c \
-			utils.c
+			sleep.c \
+			get_time.c
 			
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)
