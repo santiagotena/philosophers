@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/15 03:38:13 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/15 04:14:50 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,30 @@ void	*routine(void *args)
 	return (NULL);
 }
 
+bool	check_death(t_param *param, int i)
+{
+	unsigned long long	last_meal;
+
+	pthread_mutex_lock(&param->msg_mutex);
+	pthread_mutex_lock(&param->time_last_meal_mutex);
+	last_meal = get_time_in_ms() - param->philos[i].time_last_meal;
+	pthread_mutex_unlock(&param->time_last_meal_mutex);
+	if (is_time_to_die(last_meal, &param->philos[i]))
+	{
+		pthread_mutex_lock(&param->is_philo_dead_mutex);
+		param->is_philo_dead = 1;
+		pthread_mutex_unlock(&param->is_philo_dead_mutex);
+		die(&param->philos[i]);
+		pthread_mutex_unlock(&param->msg_mutex);
+		return (true);
+	}
+	pthread_mutex_unlock(&param->msg_mutex);
+	return (false);
+}
+
 void	*main_routine(void *args)
 {
 	int					i;
-	unsigned long long	last_meal;
 	t_param				*param;
 
 	param = (t_param *)args;
@@ -68,22 +88,53 @@ void	*main_routine(void *args)
 		{
 			if (are_all_full(param))
 				break ;
-			pthread_mutex_lock(&param->msg_mutex);
-			pthread_mutex_lock(&param->time_last_meal_mutex);
-			last_meal = get_time_in_ms() - param->philos[i].time_last_meal;
-			pthread_mutex_unlock(&param->time_last_meal_mutex);
-			if (is_time_to_die(last_meal, &param->philos[i]))
-			{
-				pthread_mutex_lock(&param->is_philo_dead_mutex);
-				param->is_philo_dead = 1;
-				pthread_mutex_unlock(&param->is_philo_dead_mutex);
-				die(&param->philos[i]);
-				pthread_mutex_unlock(&param->msg_mutex);
+			if (check_death(param, i))
 				break ;
-			}
-			pthread_mutex_unlock(&param->msg_mutex);
 			i++;
 		}
 	}
 	return (NULL);
 }
+
+// unsigned long long	get_last_meal(t_philo philo)
+// {
+// 	unsigned long long	last_meal;
+
+// 	pthread_mutex_lock(&philo.param->time_last_meal_mutex);
+// 	last_meal = get_time_in_ms() - philo.time_last_meal;
+// 	pthread_mutex_unlock(&philo.param->time_last_meal_mutex);
+// 	return (last_meal);
+// }
+
+// void	*main_routine(void *args)
+// {
+// 	int					i;
+// 	unsigned long long	last_meal;
+// 	t_param				*param;
+
+// 	param = (t_param *)args;
+// 	ft_sleep(param->time_to_die / 2);
+// 	while (are_all_alive(param) && is_any_hungry(param))
+// 	{
+// 		i = 1;
+// 		while (i <= param->n_philo)
+// 		{
+// 			if (are_all_full(param))
+// 				break ;
+// 			pthread_mutex_lock(&param->msg_mutex);
+// 			last_meal = get_last_meal(param->philos[i]);
+// 			if (is_time_to_die(last_meal, &param->philos[i]))
+// 			{
+// 				pthread_mutex_lock(&param->is_philo_dead_mutex);
+// 				param->is_philo_dead = 1;
+// 				pthread_mutex_unlock(&param->is_philo_dead_mutex);
+// 				die(&param->philos[i]);
+// 				pthread_mutex_unlock(&param->msg_mutex);
+// 				break ;
+// 			}
+// 			pthread_mutex_unlock(&param->msg_mutex);
+// 			i++;
+// 		}
+// 	}
+// 	return (NULL);
+// }
