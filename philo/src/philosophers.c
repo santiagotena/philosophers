@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/15 02:29:10 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/15 02:49:42 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	init_mutex(t_param *param)
 	i = 1;
 	while (i <= param->n_philo)
 	{
-		// pthread_mutex_init(&param->philos[i].fork_lock, NULL);
 		pthread_mutex_init(&param->forks_mutex[i], NULL);
 		i++;
 	}
@@ -70,13 +69,6 @@ int	init_mutex(t_param *param)
 	pthread_mutex_init(&param->hungry_philo_mutex, NULL);
 	pthread_mutex_init(&param->is_philo_dead_mutex, NULL);
 	pthread_mutex_init(&param->death_check_mutex, NULL);
-	// pthread_mutex_init(&param->action_mutex, NULL);
-	// pthread_mutex_init(&param->grab_drop_mutex, NULL);
-	// pthread_mutex_init(&param->read_write_mutex, NULL);
-	// pthread_mutex_init(&param->is_fork_taken_mutex, NULL);
-	// pthread_mutex_init(&param->shared_fork_mutex, NULL);
-	// pthread_mutex_init(&param->own_fork_mutex, NULL);
-	// pthread_mutex_init(&param->next_fork_mutex, NULL);
 	return (0);
 }
 
@@ -98,7 +90,6 @@ void	init_values(t_param *param)
 		else
 			param->philos[i].next_philo_id = i + 1;
 		param->philos[i].ts_must_eat = param->times_must_eat;
-		// param->philos[i].is_fork_taken = 0; // Delete?
 		param->is_fork_taken[i] = 0;
 		param->philos[i].param = param;
 		i++;
