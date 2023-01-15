@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/15 03:04:56 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/15 03:38:13 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	*main_routine(void *args)
 		{
 			if (are_all_full(param))
 				break ;
-			// pthread_mutex_lock(&param->death_check_mutex);
 			pthread_mutex_lock(&param->msg_mutex);
 			pthread_mutex_lock(&param->time_last_meal_mutex);
 			last_meal = get_time_in_ms() - param->philos[i].time_last_meal;
@@ -80,11 +79,9 @@ void	*main_routine(void *args)
 				pthread_mutex_unlock(&param->is_philo_dead_mutex);
 				die(&param->philos[i]);
 				pthread_mutex_unlock(&param->msg_mutex);
-				// pthread_mutex_unlock(&param->death_check_mutex);
 				break ;
 			}
 			pthread_mutex_unlock(&param->msg_mutex);
-			// pthread_mutex_unlock(&param->death_check_mutex);
 			i++;
 		}
 	}
