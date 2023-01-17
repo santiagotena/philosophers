@@ -6,13 +6,13 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:58:15 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/15 03:37:15 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/16 19:43:18 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	join_threads(t_param *param)
+static int	join_threads(t_param *param)
 {
 	int		i;
 
@@ -29,7 +29,7 @@ int	join_threads(t_param *param)
 	return (0);
 }
 
-int	init_threads(t_param *param)
+static int	init_threads(t_param *param)
 {
 	int		i;
 
@@ -53,7 +53,7 @@ int	init_threads(t_param *param)
 	return (0);
 }
 
-int	init_mutex(t_param *param)
+static int	init_mutex(t_param *param)
 {
 	int		i;
 
@@ -71,7 +71,7 @@ int	init_mutex(t_param *param)
 	return (0);
 }
 
-void	init_values(t_param *param)
+static void	init_values(t_param *param)
 {
 	int		i;
 

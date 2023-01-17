@@ -6,13 +6,13 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:09:00 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/15 04:15:49 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/16 19:43:41 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	routine_cont(t_philo *philo)
+static void	routine_cont(t_philo *philo)
 {
 	if (philo->philo_id % 2 == 0)
 		ft_sleep(1);
@@ -53,7 +53,7 @@ void	*routine(void *args)
 	return (NULL);
 }
 
-bool	check_death(t_param *param, int i)
+static bool	check_death(t_param *param, int i)
 {
 	unsigned long long	last_meal;
 

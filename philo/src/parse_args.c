@@ -6,13 +6,28 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 01:54:01 by stena-he          #+#    #+#             */
-/*   Updated: 2023/01/11 03:54:55 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/01/16 19:42:00 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	exit_atoi(long int output, int i)
+static int	parse_args_check(t_param *param)
+{
+	if (param->n_philo < 0)
+		return (-1);
+	if ((int)param->time_to_die < 0)
+		return (-1);
+	if (param->time_to_eat < 0)
+		return (-1);
+	if (param->time_to_sleep < 0)
+		return (-1);
+	if (param->times_must_eat < 0)
+		return (-1);
+	return (0);
+}
+
+static int	exit_atoi(long int output, int i)
 {
 	if (output < -2147483648 || output > 2147483647)
 		return (-1);
@@ -21,7 +36,7 @@ int	exit_atoi(long int output, int i)
 	return (0);
 }
 
-int	ft_isdigit(int c)
+static int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -29,7 +44,7 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-int	ft_atoi_mod(const char *str)
+static int	ft_atoi_mod(const char *str)
 {
 	long int	output;
 	long int	sign;
@@ -55,21 +70,6 @@ int	ft_atoi_mod(const char *str)
 		return (-1);
 	}
 	return ((int)(output));
-}
-
-int	parse_args_check(t_param *param)
-{
-	if (param->n_philo < 0)
-		return (-1);
-	if ((int)param->time_to_die < 0)
-		return (-1);
-	if (param->time_to_eat < 0)
-		return (-1);
-	if (param->time_to_sleep < 0)
-		return (-1);
-	if (param->times_must_eat < 0)
-		return (-1);
-	return (0);
 }
 
 int	parse_args(int argc, char **argv, t_param *param)
